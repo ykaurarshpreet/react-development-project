@@ -1,41 +1,44 @@
-import { useEffect, useState } from "react";
-import "./App.css";
 import MapView from "./components/MapView";
+// import { useState, useEffect } from "react";
+// import { useMap } from "./hooks";
 
-const API_KEY = "at_NRrw5z1AF3Qtq5EE2B72VJnUTc1AH"
+const API_KEY = "at_NRrw5z1AF3Qtq5EE2B72VJnUTc1AH";
 
 function App() {
-  const[ipData, setIpData] = useState(null)
-
-  async function fetchInitialData(){
-    try {
-
-      //grabbing current ip add
-      const ipFetch = await fetch(`https://api.ipify.org?format=json`)
-      const ipJson = await ipFetch.json()
-      console.log(ipJson);
-
-      //then were putting in the current api key
-      const currentIpFetch = await fetch(`https://geo.ipify.org/api/v2/country,city?apiKey=${API_KEY}&ipAddress=${ipJson.ip}`)
-
-      console.log(currentIpFetch)
-      setIpData(currentIpFetchJson)
-
-    } catch (error) {
-      console.error(error);
-
-    }
-  }
-  useEffect(() => {
-    fetchInitialData()
-  },[])
 
 
-  return (
-    <>
-      <MapView ipData={ipData}/>
-    </>
+  return(
+    
+    <div>
+   
+      <h1>IP Address Tracker</h1>
+
+      <input 
+        type="text" 
+        placeholder="Search for any IP address or domain"
+        // value={inputIp}
+        // onChange={(e) => setInputIp(e.target.value)}
+        />
+
+      <button>Search</button>
+     
+      <MapView/>
+
+     <div className="info"> 
+      <h3>IP Address</h3> 
+      <h3>Location</h3> 
+      <h3>Timezone</h3> 
+      <h3>ISP</h3> </div>
+    
+    </div>
   );
 }
 
 export default App;
+
+
+
+
+
+
+
